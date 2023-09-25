@@ -1,10 +1,20 @@
 version: '1'
 services:
   solr:
-    image: 'solr:8.11.1'
+    container_name: solr
+    image: solr:8.11.1
     entrypoint:
-    - bash
-    - '-c'
-    - 'precreate-core search; exec solr -f'
+      - bash
+      - '-c'
+      - 'precreate-core search; exec solr -f;'
     ports:
      - '8983:8983'
+  nginx: 
+    container_name: nginx
+    image: nginx:alpine
+    depends_on:
+      - solr
+    ports:
+      - 8899:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
