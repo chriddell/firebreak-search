@@ -3,10 +3,11 @@ services:
   solr:
     container_name: solr
     image: solr:8.11.1
-    entrypoint:
-      - bash
-      - '-c'
-      - 'precreate-core search; exec solr -f;'
+    volumes: 
+      - data:/var/solr
+    command:
+      - solr-precreate
+      - search
     ports:
      - '8983:8983'
   nginx: 
@@ -18,3 +19,5 @@ services:
       - 8899:80
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+volumes:
+  data:
