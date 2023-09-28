@@ -28,7 +28,7 @@ export const actions = {
 
     const response = await fetch(`http://localhost:8899/solr/search/select?q=${encodeURIComponent(query)}&${highlightingRules}&df=title`);
     const json = await response.json();
-    const results = json.response.docs;
+    const results = json.response?.docs;
 
     return {
       results,

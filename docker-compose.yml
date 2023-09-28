@@ -1,23 +1,17 @@
-version: '1'
 services:
   solr:
     container_name: solr
     image: solr:8.11.1
-    volumes: 
-      - data:/var/solr
     command:
       - solr-precreate
       - search
     ports:
      - '8983:8983'
-  nginx: 
-    container_name: nginx
+    volumes:
+      - ./data:/var/solr/data
+  cors: 
     image: nginx:alpine
-    depends_on:
-      - solr
     ports:
       - 8899:80
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-volumes:
-  data:
