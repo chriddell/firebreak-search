@@ -27,3 +27,5 @@ npm install
 ```zsh
 npm run dev
 ```
+
+The app should now be running on http://localhost:5173.
